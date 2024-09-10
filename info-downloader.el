@@ -10,9 +10,10 @@
                                            27.2 27.1
                                            26.3 26.2 26.1))
 
+;;;###autoload
 (defvar info-downloader-install-dir (expand-file-name "~/.emacs.d/info/")
   "ダウンロードしたInfo fileをインストールするディレクトリ")
-
+;;;###autoload
 (defun info-downloader-install (&optional urls)
   "Infoファイルをダウンロードしてインストールします。
 URLSが指定されていない場合は、`info-downloader-default-url'を使用します。"
@@ -53,11 +54,9 @@ URLSが指定されていない場合は、`info-downloader-default-url'を使�
                         (beginning-of-line)
                         (buffer-substring start (point)))))))))))
 
-;; パッケージがロードされたときにInfo-directory-listを更新
-;; (add-to-list 'Info-directory-list info-downloader-install-dir)
-(add-hook 'elpaca-after-init-hook
-          (lambda ()
-            (add-to-list 'Info-directory-list
-                         info-downloader-install-dir)))
+;;;###autoload
+(with-eval-after-load 'info
+  (add-to-list 'Info-directory-list
+                         info-downloader-install-dir))
 
 (provide 'info-downloader)
