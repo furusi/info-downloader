@@ -56,6 +56,7 @@ URLSが指定されていない場合は、`info-downloader-default-url'を使�
 
 ;;;###autoload
 (with-eval-after-load 'info
+  (info-initialize)
   (add-to-list 'Info-directory-list
                          info-downloader-install-dir))
 
